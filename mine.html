@@ -1,0 +1,1241 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AromaLux — Atirlar do‘koni</title>
+
+<style>
+:root {
+  --bg: #f6f4f1;
+  --card: #ffffff;
+  --text: #24211f;
+  --muted: #77716c;
+  --accent: #9a6b42;
+  --accent2: #754725;
+  --border: #e8e0d8;
+  --shadow: 0 8px 25px #0000000c;
+}
+
+body.dark {
+  --bg: #171614;
+  --card: #24221f;
+  --text: #f5eee6;
+  --muted: #bbb0a5;
+  --accent: #d9a574;
+  --accent2: #efbd8b;
+  --border: #3d3832;
+  --shadow: 0 8px 25px #00000030;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background .25s, color .25s;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.topbar {
+  max-width: 1250px;
+  margin: auto;
+  min-height: 76px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  color: var(--accent);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.logo span {
+  color: var(--text);
+}
+
+nav {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.nav-btn, .icon-btn {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: .2s;
+}
+
+.nav-btn:hover, .nav-btn.active, .icon-btn:hover {
+  background: var(--bg);
+  border-color: var(--border);
+  color: var(--accent);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+select, input {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 12px;
+  outline: none;
+}
+
+select:focus, input:focus {
+  border-color: var(--accent);
+}
+
+main {
+  max-width: 1250px;
+  min-height: 75vh;
+  margin: auto;
+  padding: 25px 22px 50px;
+}
+
+.page {
+  display: none;
+  animation: appear .25s ease;
+}
+
+.page.active {
+  display: block;
+}
+
+@keyframes appear {
+  from {opacity: 0; transform: translateY(5px)}
+  to {opacity: 1; transform: translateY(0)}
+}
+
+.hero {
+  min-height: 430px;
+  padding: 55px;
+  border-radius: 25px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, #17120ff2 0%, #17120fc9 45%, #17120f20 100%),
+    url("https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=1600&q=85")
+    center/cover;
+  color: white;
+}
+
+.hero-content {
+  max-width: 560px;
+}
+
+.eyebrow {
+  color: #e2b58b;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.08;
+  margin: 20px 0;
+}
+
+.hero p {
+  line-height: 1.8;
+  color: #eee4da;
+  max-width: 470px;
+}
+
+.primary-btn, .secondary-btn {
+  display: inline-block;
+  border: none;
+  border-radius: 11px;
+  padding: 13px 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: .2s;
+}
+
+.primary-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.primary-btn:hover {
+  background: var(--accent2);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 35px 0 20px;
+  flex-wrap: wrap;
+}
+
+.section-heading h2, .page-title {
+  font-size: clamp(25px, 3vw, 34px);
+}
+
+.section-heading p, .muted {
+  color: var(--muted);
+  line-height: 1.7;
+  margin-top: 7px;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.benefit {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 22px;
+  border-radius: 16px;
+}
+
+.benefit .emoji {
+  font-size: 28px;
+}
+
+.benefit h3 {
+  margin: 12px 0 8px;
+}
+
+.benefit p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform .2s, border-color .2s;
+  min-width: 0;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.product-image {
+  height: 230px;
+  position: relative;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.heart {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--text);
+  font-size: 21px;
+  box-shadow: var(--shadow);
+}
+
+.heart.liked {
+  color: #e34b64;
+}
+
+.tag {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: var(--accent);
+  color: white;
+  font-size: 11px;
+  padding: 6px 9px;
+  border-radius: 7px;
+}
+
+.product-info {
+  padding: 15px;
+}
+
+.product-brand {
+  color: var(--accent);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+.product-info h3 {
+  font-size: 17px;
+  margin: 7px 0;
+}
+
+.product-description {
+  font-size: 12px;
+  color: var(--muted);
+  min-height: 32px;
+  line-height: 1.5;
+}
+
+.rating {
+  color: #e2a83e;
+  font-size: 13px;
+  margin: 10px 0;
+}
+
+.product-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.price {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.add-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.add-btn:hover {
+  background: var(--accent2);
+}
+
+.shop-tools {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 12px;
+  margin: 25px 0;
+}
+
+.shop-tools input, .shop-tools select {
+  width: 100%;
+}
+
+.empty {
+  text-align: center;
+  padding: 70px 20px;
+  background: var(--card);
+  border: 1px dashed var(--border);
+  border-radius: 20px;
+}
+
+.empty .emoji {
+  font-size: 48px;
+}
+
+.empty h2 {
+  margin: 15px 0;
+}
+
+.empty p {
+  color: var(--muted);
+}
+
+.form-card {
+  max-width: 650px;
+  margin-top: 25px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 25px;
+}
+
+.form-group {
+  margin: 18px 0;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.setting-row:last-child {
+  border-bottom: 0;
+}
+
+.setting-row p {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--card);
+  padding: 30px 22px;
+  text-align: center;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+footer strong {
+  color: var(--accent);
+}
+
+.toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text);
+  color: var(--bg);
+  padding: 13px 20px;
+  border-radius: 12px;
+  z-index: 300;
+  opacity: 0;
+  transition: .3s;
+  box-shadow: var(--shadow);
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#cartCount, #favCount {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--accent);
+  color: white;
+  min-width: 19px;
+  height: 19px;
+  border-radius: 20px;
+  font-size: 11px;
+  padding: 0 5px;
+  margin-left: 3px;
+}
+
+@media (max-width: 1000px) {
+  .products { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .topbar { justify-content: center; }
+  nav { justify-content: center; }
+}
+
+@media (max-width: 700px) {
+  main { padding: 18px 13px 35px; }
+  .topbar { padding: 13px; gap: 12px; }
+  .logo { width: 100%; text-align: center; }
+  nav { width: 100%; gap: 4px; }
+  .nav-btn { padding: 9px 8px; font-size: 12px; }
+  .header-actions { justify-content: center; }
+  .hero { min-height: 390px; padding: 28px; }
+  .benefits { grid-template-columns: 1fr; }
+  .products { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .product-image { height: 180px; }
+  .product-info { padding: 11px; }
+  .product-info h3 { font-size: 14px; }
+  .price { font-size: 14px; }
+  .add-btn { padding: 9px 7px; }
+  .shop-tools { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 370px) {
+  .products { grid-template-columns: 1fr; }
+  .product-image { height: 260px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="logo" data-page="home">Aroma<span>Lux.</span></div>
+
+    <nav>
+      <button class="nav-btn active" data-page="home" data-i18n="home">Bosh sahifa</button>
+      <button class="nav-btn" data-page="shop" data-i18n="shop">Atirlar</button>
+      <button class="nav-btn" data-page="favorites">
+        <span data-i18n="favorites">Sevimlilar</span>
+        <span id="favCount">0</span>
+      </button>
+      <button class="nav-btn" data-page="profile" data-i18n="profile">Profil</button>
+      <button class="nav-btn" data-page="settings" data-i18n="settings">Sozlamalar</button>
+    </nav>
+
+    <div class="header-actions">
+      <select id="language" aria-label="Til">
+        <option value="uz">🇺🇿 O‘zbek</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="en">🇬🇧 English</option>
+      </select>
+      <button class="icon-btn" id="themeToggle" title="Rejimni almashtirish">🌙</button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- BOSH SAHIFA -->
+  <section class="page active" id="home">
+    <div class="hero">
+      <div class="hero-content">
+        <span class="eyebrow" data-i18n="eyebrow">NAFISLIK VA HASHAMAT</span>
+        <h1 data-i18n="heroTitle">Har bir iforda o‘ziga xoslik.</h1>
+        <p data-i18n="heroText">
+          Sizning uslubingizga mos, unutilmas hidlar olamiga xush kelibsiz.
+          Sevimli atiringizni biz bilan toping.
+        </p>
+        <button class="primary-btn" data-page="shop" data-i18n="discover">
+          Atirlarni ko‘rish →
+        </button>
+      </div>
+    </div>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="emoji">🌸</div>
+        <h3 data-i18n="benefit1">Nafis hidlar</h3>
+        <p data-i18n="benefit1Text">Har qanday kayfiyat va vaziyat uchun tanlangan atirlar.</p>
+      </div>
+      <div class="benefit">
+        <div class="emoji">🎁</div>
+        <h3 data-i18n="benefit2">Ajoyib sovg‘a</h3>
+        <p data-i18n="benefit2Text">Yaqinlaringiz uchun chiroyli va esda qolarli tanlov.</p>
+      </div>
+      <div class="benefit">
+        <div class="emoji">✨</div>
+        <h3 data-i18n="benefit3">O‘z uslubingiz</h3>
+        <p data-i18n="benefit3Text">O‘zingizga mos hidni toping va o‘ziga xos bo‘ling.</p>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      <div>
+        <h2 data-i18n="popular">Mashhur atirlar</h2>
+        <p data-i18n="popularText">Siz uchun tanlangan hidlar.</p>
+      </div>
+      <button class="secondary-btn" data-page="shop" data-i18n="allProducts">Barchasi →</button>
+    </div>
+    <div class="products" id="homeProducts"></div>
+  </section>
+
+  <!-- DO‘KON -->
+  <section class="page" id="shop">
+    <h1 class="page-title" data-i18n="shopTitle">Atirlar kolleksiyasi</h1>
+    <p class="muted" data-i18n="shopText">O‘zingizga yoqqan atirni qidiring va tanlang.</p>
+
+    <div class="shop-tools">
+      <input id="searchInput" type="search" placeholder="🔎 Atir nomini qidiring...">
+      <select id="categoryFilter">
+        <option value="all">Barcha turlar</option>
+        <option value="erkaklar">Erkaklar atiri</option>
+        <option value="ayollar">Ayollar atiri</option>
+        <option value="unisex">Unisex atir</option>
+      </select>
+      <select id="sortSelect">
+        <option value="default">Saralash: odatiy</option>
+        <option value="low">Narx: arzonidan</option>
+        <option value="high">Narx: qimmatidan</option>
+        <option value="name">Nomi bo‘yicha</option>
+      </select>
+    </div>
+
+    <p class="muted" id="resultCount"></p>
+    <div class="products" id="shopProducts"></div>
+    <div class="empty" id="shopEmpty" hidden>
+      <div class="emoji">🔎</div>
+      <h2 data-i18n="notFound">Atir topilmadi</h2>
+      <p data-i18n="tryAgain">Boshqa nom bilan qidirib ko‘ring.</p>
+    </div>
+  </section>
+
+  <!-- SEVIMLILAR -->
+  <section class="page" id="favorites">
+    <h1 class="page-title" data-i18n="favoritesTitle">❤️ Sevimli atirlarim</h1>
+    <p class="muted" data-i18n="favoritesText">Layk bosgan atirlaringiz shu yerda saqlanadi.</p>
+    <div class="products" id="favoriteProducts"></div>
+    <div class="empty" id="favoritesEmpty" hidden>
+      <div class="emoji">🤍</div>
+      <h2 data-i18n="noFavorites">Hali sevimli atir yo‘q</h2>
+      <p data-i18n="addFavorites">Atirlardagi yurak belgisini bosib, ularni shu yerga saqlang.</p>
+      <button class="primary-btn" data-page="shop" data-i18n="discover">Atirlarni ko‘rish →</button>
+    </div>
+  </section>
+
+  <!-- PROFIL -->
+  <section class="page" id="profile">
+    <h1 class="page-title" data-i18n="profileTitle">Mening profilim</h1>
+    <p class="muted" data-i18n="profileText">Ma’lumotlaringizni kiriting va saqlang.</p>
+
+    <div class="form-card">
+      <div style="font-size:50px">👤</div>
+      <div class="form-group">
+        <label for="userName" data-i18n="nameLabel">Ismingiz</label>
+        <input id="userName" type="text" maxlength="60" placeholder="Ismingizni kiriting">
+      </div>
+      <div class="form-group">
+        <label for="userEmail" data-i18n="emailLabel">Elektron pochta</label>
+        <input id="userEmail" type="email" maxlength="100" placeholder="example@email.com">
+      </div>
+      <div class="form-group">
+        <label for="userCity" data-i18n="cityLabel">Shahar</label>
+        <input id="userCity" type="text" maxlength="60" placeholder="Masalan, Toshkent">
+      </div>
+      <button class="primary-btn" id="saveProfile" data-i18n="saveProfile">Profilni saqlash</button>
+    </div>
+  </section>
+
+  <!-- SOZLAMALAR -->
+  <section class="page" id="settings">
+    <h1 class="page-title" data-i18n="settingsTitle">Sozlamalar</h1>
+    <p class="muted" data-i18n="settingsText">Saytni o‘zingizga moslang.</p>
+
+    <div class="form-card">
+      <div class="setting-row">
+        <div>
+          <h3 data-i18n="appearance">Tashqi ko‘rinish</h3>
+          <p data-i18n="appearanceText">Tungi yoki kunduzgi rejimni tanlang.</p>
+        </div>
+        <button class="secondary-btn" id="themeSetting">🌙 Tungi rejim</button>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <h3 data-i18n="languageTitle">Sayt tili</h3>
+          <p data-i18n="languageText">O‘zingizga qulay tilni tanlang.</p>
+        </div>
+        <select id="languageSetting">
+          <option value="uz">🇺🇿 O‘zbek</option>
+          <option value="ru">🇷🇺 Русский</option>
+          <option value="en">🇬🇧 English</option>
+        </select>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <h3 data-i18n="clearFavorites">Sevimlilarni tozalash</h3>
+          <p data-i18n="clearFavoritesText">Saqlangan barcha sevimli atirlarni o‘chirish.</p>
+        </div>
+        <button class="secondary-btn" id="clearFavorites" data-i18n="clearButton">Tozalash</button>
+      </div>
+
+      <div class="setting-row">
+        <div>
+          <h3 data-i18n="about">AromaLux haqida</h3>
+          <p data-i18n="aboutText">Atirlarni tanlash uchun yaratilgan namoyish sayti.</p>
+        </div>
+        <span>✨ AromaLux</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>AromaLux.</strong><br>
+  <span data-i18n="footerText">Har bir hid — o‘ziga xos hikoya.</span><br>
+  © <span id="year"></span> AromaLux
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+"use strict";
+
+/* =========================
+   1. TARJIMALAR
+========================= */
+
+const translations = {
+  uz: {
+    home:"Bosh sahifa", shop:"Atirlar", favorites:"Sevimlilar",
+    profile:"Profil", settings:"Sozlamalar",
+    eyebrow:"NAFISLIK VA HASHAMAT",
+    heroTitle:"Har bir iforda o‘ziga xoslik.",
+    heroText:"Sizning uslubingizga mos, unutilmas hidlar olamiga xush kelibsiz. Sevimli atiringizni biz bilan toping.",
+    discover:"Atirlarni ko‘rish →",
+    benefit1:"Nafis hidlar", benefit1Text:"Har qanday kayfiyat va vaziyat uchun tanlangan atirlar.",
+    benefit2:"Ajoyib sovg‘a", benefit2Text:"Yaqinlaringiz uchun chiroyli va esda qolarli tanlov.",
+    benefit3:"O‘z uslubingiz", benefit3Text:"O‘zingizga mos hidni toping va o‘ziga xos bo‘ling.",
+    popular:"Mashhur atirlar", popularText:"Siz uchun tanlangan hidlar.", allProducts:"Barchasi →",
+    shopTitle:"Atirlar kolleksiyasi", shopText:"O‘zingizga yoqqan atirni qidiring va tanlang.",
+    notFound:"Atir topilmadi", tryAgain:"Boshqa nom bilan qidirib ko‘ring.",
+    favoritesTitle:"❤️ Sevimli atirlarim",
+    favoritesText:"Layk bosgan atirlaringiz shu yerda saqlanadi.",
+    noFavorites:"Hali sevimli atir yo‘q",
+    addFavorites:"Atirlardagi yurak belgisini bosib, ularni shu yerga saqlang.",
+    profileTitle:"Mening profilim", profileText:"Ma’lumotlaringizni kiriting va saqlang.",
+    nameLabel:"Ismingiz", emailLabel:"Elektron pochta", cityLabel:"Shahar",
+    saveProfile:"Profilni saqlash", settingsTitle:"Sozlamalar",
+    settingsText:"Saytni o‘zingizga moslang.",
+    appearance:"Tashqi ko‘rinish",
+    appearanceText:"Tungi yoki kunduzgi rejimni tanlang.",
+    languageTitle:"Sayt tili", languageText:"O‘zingizga qulay tilni tanlang.",
+    clearFavorites:"Sevimlilarni tozalash",
+    clearFavoritesText:"Saqlangan barcha sevimli atirlarni o‘chirish.",
+    clearButton:"Tozalash", about:"AromaLux haqida",
+    aboutText:"Atirlarni tanlash uchun yaratilgan namoyish sayti.",
+    footerText:"Har bir hid — o‘ziga xos hikoya.",
+    searchPlaceholder:"🔎 Atir nomini qidiring...",
+    allCategories:"Barcha turlar", men:"Erkaklar atiri",
+    women:"Ayollar atiri", unisex:"Unisex atir",
+    defaultSort:"Saralash: odatiy", lowSort:"Narx: arzonidan",
+    highSort:"Narx: qimmatidan", nameSort:"Nomi bo‘yicha",
+    add:"Tanlash", liked:"❤️ Saqlangan", removed:"Sevimlilardan olib tashlandi",
+    added:"Sevimlilarga qo‘shildi", profileSaved:"Profil muvaffaqiyatli saqlandi!",
+    clearConfirm:"Barcha sevimli atirlarni o‘chirmoqchimisiz?",
+    cleared:"Sevimlilar tozalandi", themeDark:"🌙 Tungi rejim",
+    themeLight:"☀️ Kunduzgi rejim", result:"ta atir topildi",
+    popularTag:"MASHHUR", newTag:"YANGI"
+  },
+  ru: {
+    home:"Главная", shop:"Парфюм", favorites:"Избранное",
+    profile:"Профиль", settings:"Настройки",
+    eyebrow:"ЭЛЕГАНТНОСТЬ И РОСКОШЬ",
+    heroTitle:"Уникальность в каждом аромате.",
+    heroText:"Добро пожаловать в мир незабываемых ароматов. Найдите свой любимый парфюм вместе с нами.",
+    discover:"Смотреть парфюм →",
+    benefit1:"Изысканные ароматы", benefit1Text:"Ароматы для любого настроения и случая.",
+    benefit2:"Отличный подарок", benefit2Text:"Красивый и запоминающийся подарок для близких.",
+    benefit3:"Ваш стиль", benefit3Text:"Найдите аромат, который подходит именно вам.",
+    popular:"Популярные ароматы", popularText:"Подборка ароматов для вас.",
+    allProducts:"Все товары →", shopTitle:"Коллекция парфюма",
+    shopText:"Найдите и выберите понравившийся аромат.",
+    notFound:"Ароматы не найдены", tryAgain:"Попробуйте другой поисковый запрос.",
+    favoritesTitle:"❤️ Мои любимые ароматы",
+    favoritesText:"Здесь сохраняются ваши любимые ароматы.",
+    noFavorites:"Пока нет избранного",
+    addFavorites:"Нажмите на сердечко у аромата, чтобы сохранить его здесь.",
+    profileTitle:"Мой профиль", profileText:"Введите и сохраните свои данные.",
+    nameLabel:"Ваше имя", emailLabel:"Электронная почта", cityLabel:"Город",
+    saveProfile:"Сохранить профиль", settingsTitle:"Настройки",
+    settingsText:"Настройте сайт под себя.",
+    appearance:"Внешний вид", appearanceText:"Выберите тёмную или светлую тему.",
+    languageTitle:"Язык сайта", languageText:"Выберите удобный язык.",
+    clearFavorites:"Очистить избранное",
+    clearFavoritesText:"Удалить все сохранённые ароматы.",
+    clearButton:"Очистить", about:"О AromaLux",
+    aboutText:"Демонстрационный сайт для выбора парфюма.",
+    footerText:"Каждый аромат — своя история.",
+    searchPlaceholder:"🔎 Поиск аромата...",
+    allCategories:"Все виды", men:"Мужской парфюм",
+    women:"Женский парфюм", unisex:"Унисекс",
+    defaultSort:"Сортировка: обычная", lowSort:"Сначала дешевле",
+    highSort:"Сначала дороже", nameSort:"По названию",
+    add:"Выбрать", liked:"❤️ Сохранено", removed:"Удалено из избранного",
+    added:"Добавлено в избранное", profileSaved:"Профиль сохранён!",
+    clearConfirm:"Удалить все избранные ароматы?",
+    cleared:"Избранное очищено", themeDark:"🌙 Тёмная тема",
+    themeLight:"☀️ Светлая тема", result:"ароматов найдено",
+    popularTag:"ПОПУЛЯРНЫЙ", newTag:"НОВИНКА"
+  },
+  en: {
+    home:"Home", shop:"Perfumes", favorites:"Favorites",
+    profile:"Profile", settings:"Settings",
+    eyebrow:"ELEGANCE AND LUXURY",
+    heroTitle:"Be unique with every fragrance.",
+    heroText:"Welcome to a world of unforgettable scents. Find your favorite perfume with us.",
+    discover:"Explore perfumes →",
+    benefit1:"Elegant scents", benefit1Text:"Fragrances for every mood and occasion.",
+    benefit2:"Perfect gift", benefit2Text:"A beautiful and memorable gift for loved ones.",
+    benefit3:"Your own style", benefit3Text:"Find a scent that matches your personality.",
+    popular:"Popular perfumes", popularText:"Selected fragrances for you.",
+    allProducts:"View all →", shopTitle:"Perfume collection",
+    shopText:"Search and choose a fragrance you love.",
+    notFound:"No perfumes found", tryAgain:"Try another search.",
+    favoritesTitle:"❤️ My favorite perfumes",
+    favoritesText:"Your saved fragrances appear here.",
+    noFavorites:"No favorites yet",
+    addFavorites:"Tap the heart on a perfume to save it here.",
+    profileTitle:"My profile", profileText:"Enter and save your information.",
+    nameLabel:"Your name", emailLabel:"Email address", cityLabel:"City",
+    saveProfile:"Save profile", settingsTitle:"Settings",
+    settingsText:"Customize the website.",
+    appearance:"Appearance", appearanceText:"Choose dark or light mode.",
+    languageTitle:"Website language", languageText:"Choose your preferred language.",
+    clearFavorites:"Clear favorites",
+    clearFavoritesText:"Remove all saved favorite perfumes.",
+    clearButton:"Clear", about:"About AromaLux",
+    aboutText:"A demo website for exploring perfumes.",
+    footerText:"Every scent tells a story.",
+    searchPlaceholder:"🔎 Search perfumes...",
+    allCategories:"All categories", men:"Men's perfume",
+    women:"Women's perfume", unisex:"Unisex perfume",
+    defaultSort:"Sort: default", lowSort:"Price: low to high",
+    highSort:"Price: high to low", nameSort:"Name",
+    add:"Choose", liked:"❤️ Saved", removed:"Removed from favorites",
+    added:"Added to favorites", profileSaved:"Profile saved!",
+    clearConfirm:"Remove all favorite perfumes?",
+    cleared:"Favorites cleared", themeDark:"🌙 Dark mode",
+    themeLight:"☀️ Light mode", result:"perfumes found",
+    popularTag:"POPULAR", newTag:"NEW"
+  }
+};
+
+/* =========================
+   2. ATIRLAR RO‘YXATI
+========================= */
+
+const products = [
+  {id:1,name:"Sauvage",brand:"Dior",price:1250000,category:"erkaklar",rating:4.9,img:"photo-1594035910387-fea47794261f",tag:"popular",desc:"Yangi, kuchli va yog‘ochsimon hid."},
+  {id:2,name:"Bleu de Chanel",brand:"Chanel",price:1450000,category:"erkaklar",rating:4.9,img:"photo-1541643600914-78b084683601",tag:"popular",desc:"Zamonaviy va nafis erkaklar ifori."},
+  {id:3,name:"Libre",brand:"Yves Saint Laurent",price:1380000,category:"ayollar",rating:4.8,img:"photo-1592945403244-b3fbafd7f539",tag:"popular",desc:"Jasur va nafis gul ifori."},
+  {id:4,name:"Black Opium",brand:"Yves Saint Laurent",price:1320000,category:"ayollar",rating:4.8,img:"photo-1594035910387-fea47794261f",tag:"",desc:"Shirin va iliq kechki hid."},
+  {id:5,name:"Baccarat Rouge 540",brand:"Maison Francis Kurkdjian",price:2100000,category:"unisex",rating:5.0,img:"photo-1590736969955-71cc94901144",tag:"popular",desc:"Hashamatli, shirin va esda qolarli."},
+  {id:6,name:"Aventus",brand:"Creed",price:2500000,category:"erkaklar",rating:4.9,img:"photo-1595425970377-c9703cf48b6d",tag:"",desc:"Mevali va yog‘ochsimon kompozitsiya."},
+  {id:7,name:"Good Girl",brand:"Carolina Herrera",price:1180000,category:"ayollar",rating:4.7,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Shirin, nafis va jozibali hid."},
+  {id:8,name:"Acqua di Gio",brand:"Giorgio Armani",price:1100000,category:"erkaklar",rating:4.7,img:"photo-1592945403244-b3fbafd7f539",tag:"",desc:"Dengiz shabadasidek toza ifor."},
+  {id:9,name:"Chance Eau Tendre",brand:"Chanel",price:1420000,category:"ayollar",rating:4.8,img:"photo-1594035910387-fea47794261f",tag:"",desc:"Nozik mevali-gulli hid."},
+  {id:10,name:"Oud Wood",brand:"Tom Ford",price:2300000,category:"unisex",rating:4.9,img:"photo-1541643600914-78b084683601",tag:"",desc:"Boy va chuqur yog‘och ifori."},
+  {id:11,name:"Eros",brand:"Versace",price:990000,category:"erkaklar",rating:4.6,img:"photo-1595425970377-c9703cf48b6d",tag:"",desc:"Yorqin, tetiklantiruvchi hid."},
+  {id:12,name:"Bright Crystal",brand:"Versace",price:950000,category:"ayollar",rating:4.6,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Yengil va nafis gulli ifor."},
+  {id:13,name:"La Vie Est Belle",brand:"Lancôme",price:1200000,category:"ayollar",rating:4.8,img:"photo-1592945403244-b3fbafd7f539",tag:"popular",desc:"Shirin va quvonchli ifor."},
+  {id:14,name:"Explorer",brand:"Montblanc",price:870000,category:"erkaklar",rating:4.5,img:"photo-1594035910387-fea47794261f",tag:"",desc:"Sarguzasht ruhidagi zamonaviy hid."},
+  {id:15,name:"My Way",brand:"Giorgio Armani",price:1270000,category:"ayollar",rating:4.7,img:"photo-1590736969955-71cc94901144",tag:"",desc:"Oq gullar va sitrus uyg‘unligi."},
+  {id:16,name:"The One",brand:"Dolce & Gabbana",price:1050000,category:"erkaklar",rating:4.6,img:"photo-1541643600914-78b084683601",tag:"",desc:"Iliq, nafis va jozibali hid."},
+  {id:17,name:"Ombré Leather",brand:"Tom Ford",price:2200000,category:"unisex",rating:4.8,img:"photo-1595425970377-c9703cf48b6d",tag:"",desc:"Teri va ziravorlarning boy ifori."},
+  {id:18,name:"Flowerbomb",brand:"Viktor & Rolf",price:1390000,category:"ayollar",rating:4.7,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Gullarga boy, shirin kompozitsiya."},
+  {id:19,name:"L'Homme",brand:"Yves Saint Laurent",price:1130000,category:"erkaklar",rating:4.6,img:"photo-1594035910387-fea47794261f",tag:"",desc:"Yumshoq ziravor va yog‘och ifori."},
+  {id:20,name:"Molecule 01",brand:"Escentric Molecules",price:1550000,category:"unisex",rating:4.5,img:"photo-1592945403244-b3fbafd7f539",tag:"",desc:"Minimalistik va o‘ziga xos ifor."},
+  {id:21,name:"Idôle",brand:"Lancôme",price:1190000,category:"ayollar",rating:4.7,img:"photo-1590736969955-71cc94901144",tag:"",desc:"Toza atirgul va nafis hid."},
+  {id:22,name:"Y Eau de Parfum",brand:"Yves Saint Laurent",price:1290000,category:"erkaklar",rating:4.8,img:"photo-1541643600914-78b084683601",tag:"",desc:"Yangi va zamonaviy erkaklar ifori."},
+  {id:23,name:"Her",brand:"Burberry",price:1080000,category:"ayollar",rating:4.6,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Mevali va mayin shirin hid."},
+  {id:24,name:"Santal 33",brand:"Le Labo",price:1950000,category:"unisex",rating:4.8,img:"photo-1595425970377-c9703cf48b6d",tag:"",desc:"Sandal daraxti va ziravorlar ifori."},
+  {id:25,name:"L'Interdit",brand:"Givenchy",price:1160000,category:"ayollar",rating:4.7,img:"photo-1594035910387-fea47794261f",tag:"",desc:"Oq gullar va chuqur yog‘och ifori."},
+  {id:26,name:"Spicebomb",brand:"Viktor & Rolf",price:1210000,category:"erkaklar",rating:4.7,img:"photo-1592945403244-b3fbafd7f539",tag:"",desc:"Ziravorli va iliq erkaklar ifori."},
+  {id:27,name:"Neroli Portofino",brand:"Tom Ford",price:2050000,category:"unisex",rating:4.6,img:"photo-1590736969955-71cc94901144",tag:"",desc:"Sitrus va dengiz havosidek toza."},
+  {id:28,name:"Daisy",brand:"Marc Jacobs",price:990000,category:"ayollar",rating:4.5,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Yengil, quvnoq va gulli ifor."},
+  {id:29,name:"Wanted",brand:"Azzaro",price:940000,category:"erkaklar",rating:4.5,img:"photo-1541643600914-78b084683601",tag:"",desc:"Yorqin va o‘ziga ishongan hid."},
+  {id:30,name:"Wood Sage & Sea Salt",brand:"Jo Malone",price:1650000,category:"unisex",rating:4.7,img:"photo-1595425970377-c9703cf48b6d",tag:"",desc:"Dengiz tuzi va yog‘och uyg‘unligi."},
+  {id:31,name:"Delina",brand:"Parfums de Marly",price:2350000,category:"ayollar",rating:4.9,img:"photo-1590736969955-71cc94901144",tag:"new",desc:"Atirgul va mevali nafis ifor."},
+  {id:32,name:"Hacivat",brand:"Nishane",price:2250000,category:"unisex",rating:4.8,img:"photo-1594035910387-fea47794261f",tag:"new",desc:"Sitrus va yog‘och notalari."},
+  {id:33,name:"Light Blue",brand:"Dolce & Gabbana",price:1030000,category:"ayollar",rating:4.6,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Yozgi va tetiklantiruvchi ifor."},
+  {id:34,name:"Invictus",brand:"Paco Rabanne",price:1080000,category:"erkaklar",rating:4.6,img:"photo-1592945403244-b3fbafd7f539",tag:"",desc:"Sportona va tetik hid."},
+  {id:35,name:"Ani",brand:"Nishane",price:2150000,category:"unisex",rating:4.8,img:"photo-1595425970377-c9703cf48b6d",tag:"",desc:"Vanil va ziravorlarga boy ifor."},
+  {id:36,name:"Paradoxe",brand:"Prada",price:1320000,category:"ayollar",rating:4.7,img:"photo-1594035910387-fea47794261f",tag:"new",desc:"Zamonaviy, yorqin va nafis hid."},
+  {id:37,name:"Phantom",brand:"Paco Rabanne",price:1150000,category:"erkaklar",rating:4.5,img:"photo-1541643600914-78b084683601",tag:"",desc:"Yangi va texnologik ruhdagi ifor."},
+  {id:38,name:"Eau des Merveilles",brand:"Hermès",price:1480000,category:"unisex",rating:4.7,img:"photo-1590736969955-71cc94901144",tag:"",desc:"Quruq yog‘och va amber ifori."},
+  {id:39,name:"Dylan Blue",brand:"Versace",price:1010000,category:"erkaklar",rating:4.6,img:"photo-1592945403244-b3fbafd7f539",tag:"",desc:"Yangi va chuqur erkaklar hidi."},
+  {id:40,name:"Mon Paris",brand:"Yves Saint Laurent",price:1250000,category:"ayollar",rating:4.7,img:"photo-1547887538-e3a2f32cb1cc",tag:"",desc:"Romantik mevali-gulli ifor."}
+];
+
+/* =========================
+   3. SAQLANADIGAN MA’LUMOTLAR
+========================= */
+
+function loadJSON(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    return fallback;
+  }
+}
+
+let favorites = loadJSON("aromalux_favorites", []);
+let currentLanguage = localStorage.getItem("aromalux_language") || "uz";
+let currentTheme = localStorage.getItem("aromalux_theme") || "light";
+
+if (!translations[currentLanguage]) currentLanguage = "uz";
+
+const $ = selector => document.querySelector(selector);
+const $$ = selector => document.querySelectorAll(selector);
+
+function saveFavorites() {
+  localStorage.setItem("aromalux_favorites", JSON.stringify(favorites));
+  updateFavoriteCount();
+}
+
+function money(price) {
+  return new Intl.NumberFormat("uz-UZ").format(price) + " so‘m";
+}
+
+function showToast(message) {
+  const toast = $("#toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2400);
+}
+
+/* =========================
+   4. SAHIFALAR ALMASHTIRISH
+========================= */
+
+function showPage(pageName) {
+  const target = $("#" + pageName);
+
+  if (!target || !target.classList.contains("page")) return;
+
+  $$(".page").forEach(page => page.classList.remove("active"));
+  target.classList.add("active");
+
+  $$(".nav-btn").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === pageName);
+  });
+
+  if (pageName === "favorites") renderFavorites();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+document.addEventListener("click", function(event) {
+  const button = event.target.closest("[data-page]");
+  if (button) showPage(button.dataset.page);
+});
+
+/* =========================
+   5. ATIR KARTALARI
+========================= */
+
+function productCard(product) {
+  const liked = favorites.includes(product.id);
+  const t = translations[currentLanguage];
+
+  let tag = "";
+  if (product.tag === "popular") tag = t.popularTag;
+  if (product.tag === "new") tag = t.newTag;
+
+  const imageUrl =
+    "https://images.unsplash.com/" + product.img +
+    "?auto=format&fit=crop&w=700&q=80";
+
+  return `
+    <article class="product-card">
+      <div class="product-image">
+        <img
+          src="${imageUrl}"
+          alt="${product.brand} ${product.name}"
+          loading="lazy"
+          onerror="this.onerror=null;this.src='https://placehold.co/600x700/e9dfd2/754725?text=Perfume';"
+        >
+        ${tag ? `<span class="tag">${tag}</span>` : ""}
+        <button
+          class="heart ${liked ? "liked" : ""}"
+          data-favorite="${product.id}"
+          aria-label="Sevimlilarga qo‘shish"
+          title="Sevimlilarga qo‘shish"
+        >${liked ? "♥" : "♡"}</button>
+      </div>
+
+      <div class="product-info">
+        <div class="product-brand">${product.brand}</div>
+        <h3>${product.name}</h3>
+        <p class="product-description">${product.desc}</p>
+        <div class="rating">★★★★★ <span style="color:var(--muted)">(${product.rating})</span></div>
+        <div class="product-bottom">
+          <span class="price">${money(product.price)}</span>
+          <button class="add-btn" data-favorite="${product.id}">
+            ${liked ? t.liked : "♡ " + t.add}
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function renderHome() {
+  $("#homeProducts").innerHTML =
+    products.slice(0, 8).map(productCard).join("");
+}
+
+function renderShop() {
+  const query = $("#searchInput").value.trim().toLowerCase();
+  const category = $("#categoryFilter").value;
+  const sort = $("#sortSelect").value;
+
+  let filtered = products.filter(product => {
+    const matchesQuery =
+      product.name.toLowerCase().includes(query) ||
+      product.brand.toLowerCase().includes(query) ||
+      product.desc.toLowerCase().includes(query);
+
+    const matchesCategory =
+      category === "all" || product.category === category;
+
+    return matchesQuery && matchesCategory;
+  });
+
+  if (sort === "low") filtered.sort((a, b) => a.price - b.price);
+  if (sort === "high") filtered.sort((a, b) => b.price - a.price);
+  if (sort === "name") filtered.sort((a, b) => a.name.localeCompare(b.name));
+
+  $("#shopProducts").innerHTML = filtered.map(productCard).join("");
+  $("#resultCount").textContent =
+    filtered.length + " " + translations[currentLanguage].result;
+  $("#shopEmpty").hidden = filtered.length !== 0;
+}
+
+function renderFavorites() {
+  const selected = products.filter(product => favorites.includes(product.id));
+
+  $("#favoriteProducts").innerHTML = selected.map(productCard).join("");
+  $("#favoritesEmpty").hidden = selected.length !== 0;
+
+  updateFavoriteCount();
+}
+
+function renderAll() {
+  renderHome();
+  renderShop();
+  renderFavorites();
+}
+
+/* =========================
+   6. SEVIMLILAR
+========================= */
+
+document.addEventListener("click", function(event) {
+  const button = event.target.closest("[data-favorite]");
+  if (!button) return;
+
+  const id = Number(button.dataset.favorite);
+
+  if (!products.some(product => product.id === id)) return;
+
+  if (favorites.includes(id)) {
+    favorites = favorites.filter(item => item !== id);
+    showToast(translations[currentLanguage].removed);
+  } else {
+    favorites.push(id);
+    showToast(translations[currentLanguage].added);
+  }
+
+  saveFavorites();
+  renderAll();
+});
+
+function updateFavoriteCount() {
+  $("#favCount").textContent = favorites.length;
+}
+
+/* =========================
+   7. TUNGI / KUNDUZGI REJIM
+========================= */
+
+function setTheme(theme) {
+  currentTheme = theme;
+  document.body.classList.toggle("dark", theme === "dark");
+
+  $("#themeToggle").textContent = theme === "dark" ? "☀️" : "🌙";
+  $("#themeSetting").textContent = theme === "dark"
+    ? translations[currentLanguage].themeLight
+    : translations[currentLanguage].themeDark;
+
+  localStorage.setItem("aromalux_theme", theme);
+}
+
+function toggleTheme() {
+  setTheme(currentTheme === "dark" ? "light" : "dark");
+}
+
+$("#themeToggle").addEventListener("click", toggleTheme);
+$("#themeSetting").addEventListener("click", toggleTheme);
+
+/* =========================
+   8. TILNI ALMASHTIRISH
+========================= */
+
+function setLanguage(language) {
+  if (!translations[language]) return;
+
+  currentLanguage = language;
+  localStorage.setItem("aromalux_language", language);
+
+  document.documentElement.lang = language;
+  $("#language").value = language;
+  $("#languageSetting").value = language;
+
+  const t = translations[language];
+
+  $$("[data-i18n]").forEach(element => {
+    const key = element.dataset.i18n;
+    if (t[key]) element.textContent = t[key];
+  });
+
+  $("#searchInput").placeholder = t.searchPlaceholder;
+
+  const categoryOptions = $("#categoryFilter").options;
+  categoryOptions[0].textContent = t.allCategories;
+  categoryOptions[1].textContent = t.men;
+  categoryOptions[2].textContent = t.women;
+  categoryOptions[3].textContent = t.unisex;
+
+  const sortOptions = $("#sortSelect").options;
+  sortOptions[0].textContent = t.defaultSort;
+  sortOptions[1].textContent = t.lowSort;
+  sortOptions[2].textContent = t.highSort;
+  sortOptions[3].textContent = t.nameSort;
+
+  setTheme(currentTheme);
+  renderAll();
+}
+
+$("#language").addEventListener("change", event => {
+  setLanguage(event.target.value);
+});
+
+$("#languageSetting").addEventListener("change", event => {
+  setLanguage(event.target.value);
+});
+
+/* =========================
+   9. QIDIRISH VA SARALASH
+========================= */
+
+$("#searchInput").addEventListener("input", renderShop);
+$("#categoryFilter").addEventListener("change", renderShop);
+$("#sortSelect").addEventListener("change", renderShop);
+
+/* =========================
+   10. PROFILNI SAQLASH
+========================= */
+
+function loadProfile() {
+  const profile = loadJSON("aromalux_profile", {});
+
+  $("#userName").value = profile.name || "";
+  $("#userEmail").value = profile.email || "";
+  $("#userCity").value = profile.city || "";
+}
+
+$("#saveProfile").addEventListener("click", function() {
+  const profile = {
+    name: $("#userName").value.trim(),
+    email: $("#userEmail").value.trim(),
+    city: $("#userCity").value.trim()
+  };
+
+  if (profile.email && !$("#userEmail").checkValidity()) {
+    showToast("Elektron pochta manzilini tekshiring.");
+    return;
+  }
+
+  localStorage.setItem("aromalux_profile", JSON.stringify(profile));
+  showToast(translations[currentLanguage].profileSaved);
+});
+
+/* =========================
+   11. SEVIMLILARNI TOZALASH
+========================= */
+
+$("#clearFavorites").addEventListener("click", function() {
+  if (favorites.length === 0) {
+    showToast(translations[currentLanguage].noFavorites);
+    return;
+  }
+
+  if (!confirm(translations[currentLanguage].clearConfirm)) return;
+
+  favorites = [];
+  saveFavorites();
+  renderAll();
+  showToast(translations[currentLanguage].cleared);
+});
+
+/* =========================
+   12. SAYTNI ISHGA TUSHIRISH
+========================= */
+
+$("#year").textContent = new Date().getFullYear();
+
+loadProfile();
+setTheme(currentTheme);
+setLanguage(currentLanguage);
+renderAll();
+</script>
+
+</body>
+</html>
